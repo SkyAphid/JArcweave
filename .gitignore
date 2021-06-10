@@ -1,0 +1,8 @@
+*.class
+**/*.iws
+**/*.iml
+**/build
+**/target
+
+!*.classpath
+/bin/
