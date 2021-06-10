@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nokoriware.arcweave</groupId>
+	<artifactId>jarcweave</artifactId>
+	<version>1</version>
+	<name>JArcweave</name>
+
+	<!-- Configurable version numbers for various dependencies -->
+	<properties>
+		<javaxjson.version>1.1.4</javaxjson.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>15</source>
+					<target>15</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Dependencies Start -->
+	<dependencies>
+	
+	<!-- Javax Json API -->
+		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+			<version>${javaxjson.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>${javaxjson.version}</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

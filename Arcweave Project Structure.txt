@@ -1,0 +1,28 @@
+Project
+-Name
+-Starting Element
+
+-Boards (ID and data)
+	-Notes (tied by ID)
+	-Jumpers (tied by ID)
+	-Elements (tied by ID)
+	-Connections (tied by ID)
+
+-Notes (ID and Data)
+-Elements (ID and Data)
+-Jumpers (ID and Data)
+-Connections (ID and Data)
+
+-Components (ID and Data)
+	-Attributes (tied by ID)
+-Attributes (ID and Data)
+
+-Variables
+-Conditions
+-Branches
+
+-----
+
+The general idea of this file format is that everything is tied together by their IDs, and the project itself houses all of these items in lists that contain their IDs with their data. The above diagram appears to be the general structure ofr the format.
+
+I've written JArcweave to try and take this concept and convert it into an object based system that's easy to use, but still enough like the file format to where it's still recognizable of how it's saved.

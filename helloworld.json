@@ -1,0 +1,181 @@
+{
+    "startingElement": "f385c762-315b-44ca-9560-edc4763eb8c5",
+    "boards": {
+        "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c": {
+            "name": "Arcweave Board 2",
+            "notes": [],
+            "jumpers": [],
+            "branches": [],
+            "elements": [
+                "17d883b5-ea07-4b75-aa6f-f3e10506de00"
+            ],
+            "connections": []
+        },
+        "2ad15ff6-f2ba-4f1d-9d9d-68938c683d7e": {
+            "name": "Root",
+            "root": true,
+            "branches": [],
+            "children": [
+                "6b0eccbc-0b3c-4885-adf2-08014aec2f3e",
+                "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c"
+            ]
+        },
+        "6b0eccbc-0b3c-4885-adf2-08014aec2f3e": {
+            "name": "Arcweave Board 1",
+            "notes": [
+                "49912502-1eb4-412f-809e-a4d6c70c8a36"
+            ],
+            "jumpers": [
+                "031ad9e7-ff95-4fec-8e16-c5462f1c09bf"
+            ],
+            "branches": [],
+            "elements": [
+                "f385c762-315b-44ca-9560-edc4763eb8c5",
+                "671670a2-6621-4ed1-9097-35849eca6f02"
+            ],
+            "connections": [
+                "1514a4e1-9c5b-4b82-af70-60fc88807ed4",
+                "30791d27-3a7a-4eca-a47a-4a0b808089d6",
+                "780bb852-9de7-4901-98b5-19f89c770ef8"
+            ]
+        }
+    },
+    "notes": {
+        "49912502-1eb4-412f-809e-a4d6c70c8a36": {
+            "theme": "default",
+            "content": "<p>Test Note<\/p>"
+        }
+    },
+    "elements": {
+        "17d883b5-ea07-4b75-aa6f-f3e10506de00": {
+            "theme": "default",
+            "title": "<p>Jumper Test<\/p>",
+            "content": "<p>Test complete.<\/p>",
+            "outputs": [],
+            "components": [],
+            "linkedBoard": null
+        },
+        "671670a2-6621-4ed1-9097-35849eca6f02": {
+            "theme": "default",
+            "title": "<p>Player responds no<\/p>",
+            "content": "<p>But thou must.<\/p>",
+            "outputs": [
+                "30791d27-3a7a-4eca-a47a-4a0b808089d6"
+            ],
+            "components": [],
+            "linkedBoard": null
+        },
+        "f385c762-315b-44ca-9560-edc4763eb8c5": {
+            "theme": "default",
+            "title": "<p><span class=\"mention mention-component\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-type=\"component\">Princess<\/span> | Starting Point<\/p>",
+            "content": "<p>Doest thou love me?<\/p><p><\/p>",
+            "outputs": [
+                "1514a4e1-9c5b-4b82-af70-60fc88807ed4",
+                "780bb852-9de7-4901-98b5-19f89c770ef8"
+            ],
+            "components": [
+                "7362bb13-ae4d-4956-8433-dd9a36a3b827"
+            ],
+            "linkedBoard": null
+        }
+    },
+    "jumpers": {
+        "031ad9e7-ff95-4fec-8e16-c5462f1c09bf": {
+            "elementId": "17d883b5-ea07-4b75-aa6f-f3e10506de00"
+        }
+    },
+    "connections": {
+        "1514a4e1-9c5b-4b82-af70-60fc88807ed4": {
+            "type": "Bezier",
+            "label": "<p>No<\/p>",
+            "theme": "default",
+            "sourceid": "f385c762-315b-44ca-9560-edc4763eb8c5",
+            "targetid": "671670a2-6621-4ed1-9097-35849eca6f02",
+            "sourceType": "elements",
+            "targetType": "elements"
+        },
+        "30791d27-3a7a-4eca-a47a-4a0b808089d6": {
+            "type": "Straight",
+            "label": null,
+            "theme": "default",
+            "sourceid": "671670a2-6621-4ed1-9097-35849eca6f02",
+            "targetid": "f385c762-315b-44ca-9560-edc4763eb8c5",
+            "sourceType": "elements",
+            "targetType": "elements"
+        },
+        "780bb852-9de7-4901-98b5-19f89c770ef8": {
+            "type": "Bezier",
+            "label": "<p>Yes<\/p>",
+            "theme": "default",
+            "sourceid": "f385c762-315b-44ca-9560-edc4763eb8c5",
+            "targetid": "031ad9e7-ff95-4fec-8e16-c5462f1c09bf",
+            "sourceType": "elements",
+            "targetType": "jumpers"
+        }
+    },
+    "branches": {},
+    "components": {
+        "65005bda-15d0-41c5-867f-68c118829f08": {
+            "name": "Root",
+            "root": true,
+            "children": [
+                "fa026a43-d4a1-440c-bcf5-a72066d081d8"
+            ]
+        },
+        "7362bb13-ae4d-4956-8433-dd9a36a3b827": {
+            "name": "Princess",
+            "attributes": [
+                "de7f78bf-3ef4-43d3-8822-02c801512d54",
+                "a7cdc128-febc-4eea-a8c3-62817eded92b",
+                "12fb5c6b-73c2-4306-8443-4785894d0549"
+            ]
+        },
+        "fa026a43-d4a1-440c-bcf5-a72066d081d8": {
+            "name": "Characters",
+            "children": [
+                "7362bb13-ae4d-4956-8433-dd9a36a3b827"
+            ]
+        }
+    },
+    "attributes": {
+        "12fb5c6b-73c2-4306-8443-4785894d0549": {
+            "name": "Name",
+            "value": {
+                "data": "Princess",
+                "type": "string"
+            }
+        },
+        "a7cdc128-febc-4eea-a8c3-62817eded92b": {
+            "name": "Identifier",
+            "value": {
+                "data": "<p>Character<\/p>",
+                "type": "string"
+            }
+        },
+        "de7f78bf-3ef4-43d3-8822-02c801512d54": {
+            "name": "Filename",
+            "value": {
+                "data": "<p>princess<\/p>",
+                "type": "string"
+            }
+        }
+    },
+    "assets": {
+        "647d0495-341f-42b2-8788-b47dace22bf8": {
+            "root": true,
+            "children": []
+        }
+    },
+    "variables": {
+        "b113a19b-c25f-4216-b51c-86c554528290": {
+            "root": true,
+            "children": []
+        }
+    },
+    "conditions": {},
+    "name": "Test",
+    "cover": {
+        "file": "1605035391_5faae57f887de.png",
+        "type": "cover-image"
+    }
+}
