@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.nokoriware.arcweave</groupId>
-	<artifactId>jarcweave</artifactId>
+	<artifactId>jarcweave-importer</artifactId>
 	<version>1</version>
 	<name>JArcweave</name>
 
