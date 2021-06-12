@@ -2,10 +2,12 @@ package com.nokoriware.nngine.arcweave.project;
 
 import java.util.ArrayList;
 
-public class Project {
+public class ArcweaveProject {
 
 	private String name;
 	private String startingElementID;
+	
+	private Cover cover;
 
 	private ArrayList<Board> boards = new ArrayList<>();
 
@@ -31,6 +33,18 @@ public class Project {
 
 	public void setStartingElementID(String startingElementID) {
 		this.startingElementID = startingElementID;
+	}
+	
+	/*
+	 * Cover
+	 */
+	
+	public Cover getCover() {
+		return cover;
+	}
+
+	public void setCover(Cover cover) {
+		this.cover = cover;
 	}
 	
 	/*

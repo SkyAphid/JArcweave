@@ -6,10 +6,11 @@ public class Board extends Carrier {
 	
 	private String name;
 	
-	private ArrayList<Note> notes = new ArrayList<>();
-	private ArrayList<Jumper> jumpers = new ArrayList<>();
-	private ArrayList<Element> elements = new ArrayList<>();
-	private ArrayList<Connection> connections = new ArrayList<>();
+	private ArrayList<String> noteIDs = new ArrayList<>();
+	private ArrayList<String> jumperIDs = new ArrayList<>();
+	private ArrayList<String> branchIDs = new ArrayList<>();
+	private ArrayList<String> elementIDs = new ArrayList<>();
+	private ArrayList<String> connectionIDs = new ArrayList<>();
 	
 	public Board(String id) {
 		super(id);
@@ -23,20 +24,24 @@ public class Board extends Carrier {
 		this.name = name;
 	}
 
-	public ArrayList<Note> getNotes() {
-		return notes;
+	public ArrayList<String> getNoteIDs() {
+		return noteIDs;
+	}
+	
+	public ArrayList<String> getJumperIDs() {
+		return jumperIDs;
+	}
+	
+	public ArrayList<String> getBranchIDs() {
+		return branchIDs;
 	}
 
-	public ArrayList<Jumper> getJumpers() {
-		return jumpers;
+	public ArrayList<String> getElementIDs() {
+		return elementIDs;
 	}
-
-	public ArrayList<Element> getElements() {
-		return elements;
-	}
-
-	public ArrayList<Connection> getConnections() {
-		return connections;
+	
+	public ArrayList<String> getConnectionIDs() {
+		return connectionIDs;
 	}
 
 }

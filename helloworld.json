@@ -49,7 +49,7 @@
     "elements": {
         "17d883b5-ea07-4b75-aa6f-f3e10506de00": {
             "theme": "default",
-            "title": "<p>Jumper Test<\/p>",
+            "title": "<p>Player respond yes | Jumper Test<\/p>",
             "content": "<p>Test complete.<\/p>",
             "outputs": [],
             "components": [],
@@ -68,7 +68,7 @@
         "f385c762-315b-44ca-9560-edc4763eb8c5": {
             "theme": "default",
             "title": "<p><span class=\"mention mention-component\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-type=\"component\">Princess<\/span> | Starting Point<\/p>",
-            "content": "<p>Doest thou love me?<\/p><p><\/p>",
+            "content": "<p>'Dost thou love me?<\/p><p><\/p>",
             "outputs": [
                 "1514a4e1-9c5b-4b82-af70-60fc88807ed4",
                 "780bb852-9de7-4901-98b5-19f89c770ef8"
@@ -115,16 +115,22 @@
     },
     "branches": {},
     "components": {
+        "08047210-6287-4c8e-86f6-de4f55d749b2": {
+            "name": "ComponentListTestObject",
+            "attributes": []
+        },
         "65005bda-15d0-41c5-867f-68c118829f08": {
             "name": "Root",
             "root": true,
             "children": [
-                "fa026a43-d4a1-440c-bcf5-a72066d081d8"
+                "fa026a43-d4a1-440c-bcf5-a72066d081d8",
+                "08047210-6287-4c8e-86f6-de4f55d749b2"
             ]
         },
         "7362bb13-ae4d-4956-8433-dd9a36a3b827": {
             "name": "Princess",
             "attributes": [
+                "d1618fe6-986d-4fef-b45f-7e0853e21376",
                 "de7f78bf-3ef4-43d3-8822-02c801512d54",
                 "a7cdc128-febc-4eea-a8c3-62817eded92b",
                 "12fb5c6b-73c2-4306-8443-4785894d0549"
@@ -152,6 +158,15 @@
                 "type": "string"
             }
         },
+        "d1618fe6-986d-4fef-b45f-7e0853e21376": {
+            "name": null,
+            "value": {
+                "data": [
+                    "08047210-6287-4c8e-86f6-de4f55d749b2"
+                ],
+                "type": "component-list"
+            }
+        },
         "de7f78bf-3ef4-43d3-8822-02c801512d54": {
             "name": "Filename",
             "value": {
@@ -173,7 +188,7 @@
         }
     },
     "conditions": {},
-    "name": "Test",
+    "name": "Hello World",
     "cover": {
         "file": "1605035391_5faae57f887de.png",
         "type": "cover-image"
