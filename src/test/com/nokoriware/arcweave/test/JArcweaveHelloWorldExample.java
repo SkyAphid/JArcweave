@@ -10,14 +10,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.nokoriware.nngine.arcweave.io.ArcweaveJsonImporter;
 import com.nokoriware.nngine.arcweave.io.ArcweaveProjectProcessor;
-import com.nokoriware.nngine.arcweave.project.*;
-import com.nokoriware.nngine.arcweave.project.processed.ArcweaveProject;
-import com.nokoriware.nngine.arcweave.project.raw.RawArcweaveProject;
-import com.nokoriware.nngine.arcweave.project.raw.RawElement;
+import com.nokoriware.nngine.arcweave.project.processed.*;
+import com.nokoriware.nngine.arcweave.project.raw.*;
 
 public class JArcweaveHelloWorldExample {
+	
 	public static void main(String[] args) {
-		System.out.println("Running import test.");
+		System.out.println("Hello world. Select an Arcweave JSON file to test.");
 		
 		/*
 		 * Set look and feel because I'm OCD
@@ -50,6 +49,8 @@ public class JArcweaveHelloWorldExample {
     		try {
     			RawArcweaveProject rawProject = ArcweaveJsonImporter.read(f);
     			ArcweaveProject project = ArcweaveProjectProcessor.process(rawProject);
+    			
+    			System.out.println("Arcweave Project successfully imported and processed.");
 
     			basicDialogueProgram(project);
     			
@@ -59,6 +60,7 @@ public class JArcweaveHelloWorldExample {
     		
         } else {
         	System.out.println("No file selected. Terminating program.");
+        	System.exit(1);
         }
 	}
 	
@@ -70,7 +72,7 @@ public class JArcweaveHelloWorldExample {
 		
 		System.out.println("Beginning dialogue test."
 				+ "\n\nThe selected project is \"" + project.getName() + ".\""
-				+ "\nThe dialogue will begin at the Starting Element.\n\n");
+				+ "\nThe dialogue will begin at the Starting Element.\n");
 		
 		/*
 		 * Begin dialogue
@@ -78,26 +80,92 @@ public class JArcweaveHelloWorldExample {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		/*RawElement nextElement = project.getElement(project.getStartingElementID());
+		Element currentElement = project.getStartingElement();
 		
-		while (nextElement != null) {
-			System.out.println(nextElement.getContent());
+		while (currentElement != null) {
+			//Print dialogue
+			System.out.println("\"" + currentElement.getContent() + "\"");
 			
-			if (nextElement.getConnectionIDs().isEmpty()) {
+			//If the connections contain labels, we'll print them as selectable options.
+			if (currentElement.connectionsContainLabels()) {
 				
+				//Print available responses
+				ArrayList<Connection> options = currentElement.getConnectionOutputs();
 				
+				System.out.println();
+				
+				for (int i = 0; i < options.size(); i++) {
+					Connection connection = options.get(i);
+					System.out.println(i + ": " + connection.getLabel());
+				}
+				
+				//Obtain user response
+				int response = obtainUserResponse(scanner);
+				
+				if (response >= 0 && response < options.size()) {
+					Connection selected = options.get(response);
+					
+					System.out.println("\n>" + selected.getLabel() + ".");
+					
+					//System.out.println(selected.getID() + " " + selected.getSourceElement().getID() + " " + (selected.getTargetElement() != null ? selected.getTargetElement().getID() : "No target"));
+
+					//Proceed to next element
+					Element target = selected.getTargetElement();
+					
+					currentElement = target;
+				} else {
+					System.err.println("Please input an available response number.\n");
+				}
+
+				
+			} else {
+				//Otherwise if there are no responses available, we'll skip straight to the next element.
+				ArrayList<Connection> outputs = currentElement.getConnectionOutputs();
+				
+				//Warning in case there are multiplied unlabelled connection outputs
+				if (outputs.size() > 1) {
+					System.err.println("Warning: multiple unlabelled connections present in \"" + currentElement.getTitle() + ".\"");
+				}
+				
+				//Proceed to next element, if available
+				if (!outputs.isEmpty()) {
+					
+					Connection connection = outputs.get(0);
+					Element target = connection.getTargetElement();
+					currentElement = target;
+					
+				} else {
+					
+					//If there is no element, end the dialogue exchange.
+					currentElement = null;
+				}
+
 			}
-			
-			String response = scanner.nextLine(); // Read user input
-			
-		}*/
+		}
 		
 		/*
 		 * Close Program
 		 */
 		
-		System.out.println("End of dialogue. Terminating.");
+		System.out.println("\nEnd of dialogue. Terminating program.");
 		scanner.close();
+		System.exit(0);
+	}
+	
+	private static int obtainUserResponse(Scanner scanner) {
+		System.out.println("\nType the corresponding number of the response you want to reply with:");
+		String response = scanner.nextLine();
+		
+		try {
+			
+			int chosenOption = Integer.parseInt(response);
+			return chosenOption;
+			
+		} catch (NumberFormatException e) {
+			
+			System.err.println("Invalid number.");
+			return -1;
+		}
 	}
 
 }

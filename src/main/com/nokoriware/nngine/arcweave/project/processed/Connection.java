@@ -1,16 +1,49 @@
 package com.nokoriware.nngine.arcweave.project.processed;
 
-import com.nokoriware.nngine.arcweave.project.raw.RawConnection.Type;
 import com.nokoriware.nngine.arcweave.project.util.Carrier;
 
 public class Connection extends Carrier {
 	
-	private String label;
-	private Element source;
-	private Element target;
+	public enum Type {
+		ELEMENTS("elements"),
+		JUMPERS("jumpers");
+		
+		private String typeName;
+		
+		public static final Type[] values = values();
+		
+		private Type(String typeName) {
+			this.typeName = typeName;
+		}
+		
+		/**
+		 * Returns the string name of these enumerator values, which are present in the Arcweave JSON files.
+		 */
+		public String getTypeName() {
+			return typeName;
+		}
+		
+		/**
+		 * Returns the Connection Type enum based on its string name counterpart present in the Arcweave JSON files.
+		 */
+		public static Type get(String typeStringName) {
+			for (int i = 0; i < values.length; i++) {
+				if (values[i].getTypeName().equals(typeStringName)) {
+					return values[i];
+				}
+			}
+			
+			return null;
+		}
+	}
 
-	private Type sourceType;
-	private Type targetType;
+	private String label;
+	
+	private Element sourceElement;
+	private Element targetElement;
+
+	private Connection.Type sourceType;
+	private Connection.Type targetType;
 
 	public Connection(String id) {
 		super(id);
@@ -24,35 +57,36 @@ public class Connection extends Carrier {
 		this.label = label;
 	}
 
-	public Element getSource() {
-		return source;
+	public Element getSourceElement() {
+		return sourceElement;
 	}
 
-	public void setSource(Element source) {
-		this.source = source;
+	
+	public void setSourceElement(Element source) {
+		this.sourceElement = source;
 	}
 
-	public Element getTarget() {
-		return target;
+	public Element getTargetElement() {
+		return targetElement;
 	}
 
-	public void setTarget(Element target) {
-		this.target = target;
+	public void setTargetElement(Element target) {
+		this.targetElement = target;
 	}
-
-	public Type getSourceType() {
+	
+	public Connection.Type getSourceType() {
 		return sourceType;
 	}
 
-	public void setSourceType(Type sourceType) {
+	public void setSourceType(Connection.Type sourceType) {
 		this.sourceType = sourceType;
 	}
 
-	public Type getTargetType() {
+	public Connection.Type getTargetType() {
 		return targetType;
 	}
 
-	public void setTargetType(Type targetType) {
+	public void setTargetType(Connection.Type targetType) {
 		this.targetType = targetType;
 	}
 

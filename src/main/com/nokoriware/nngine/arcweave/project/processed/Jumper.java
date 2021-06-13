@@ -4,18 +4,18 @@ import com.nokoriware.nngine.arcweave.project.util.Carrier;
 
 public class Jumper extends Carrier {
 	
-	private Element elementID;
+	private Element element;
 
 	public Jumper(String id) {
 		super(id);
 	}
 	
-	public Element getElementID() {
-		return elementID;
+	public Element getElement() {
+		return element;
 	}
 
-	public void setElementID(Element elementID) {
-		this.elementID = elementID;
+	public void setElement(Element element) {
+		this.element = element;
 	}
 
 }

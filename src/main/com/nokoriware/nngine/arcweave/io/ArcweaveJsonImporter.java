@@ -11,6 +11,8 @@ import javax.json.JsonReader;
 import javax.json.JsonValue.ValueType;
 
 import com.nokoriware.nngine.arcweave.project.processed.ArcweaveProject;
+import com.nokoriware.nngine.arcweave.project.processed.AttributeValue;
+import com.nokoriware.nngine.arcweave.project.processed.Connection;
 import com.nokoriware.nngine.arcweave.project.processed.Cover;
 import com.nokoriware.nngine.arcweave.project.raw.*;
 
@@ -292,7 +294,7 @@ public class ArcweaveJsonImporter {
 			for (int i = 0; i < outputArray.size(); i++) {
 
 				String outputID = outputArray.getJsonString(i).getString();
-				element.getConnectionIDs().add(outputID);
+				element.getConnectionOutputIDs().add(outputID);
 			}
 
 			// attached component IDs
@@ -304,7 +306,16 @@ public class ArcweaveJsonImporter {
 				element.getComponentIDs().add(componentID);
 			}
 
-			// TODO linked boards go here, if ever needed
+			//linked board
+			if (elementObject.get("linkedBoard").getValueType() != ValueType.NULL) {
+				
+				String linkedBoardID = elementObject.getString("linkedBoard");
+				element.setLinkedBoardID(linkedBoardID);
+				
+			} else {
+				
+				element.setLinkedBoardID("");
+			}
 			
 			//Add elements to Project
 			project.getElements().add(element);
@@ -366,12 +377,12 @@ public class ArcweaveJsonImporter {
 
 			// source type
 			String sourceTypeID = connectionObject.getString("sourceType");
-			RawConnection.Type sourceType = RawConnection.Type.get(sourceTypeID);
+			Connection.Type sourceType = Connection.Type.get(sourceTypeID);
 			connection.setSourceType(sourceType);
 
 			// target type
 			String targetTypeID = connectionObject.getString("targetType");
-			RawConnection.Type targetType = RawConnection.Type.get(targetTypeID);
+			Connection.Type targetType = Connection.Type.get(targetTypeID);
 			connection.setTargetType(targetType);
 
 			//Add connections to project
@@ -455,6 +466,8 @@ public class ArcweaveJsonImporter {
 			if (attributeObject.get("name").getValueType() != ValueType.NULL) {
 				String name = attributeObject.getString("name");
 				attribute.setName(name);
+			} else {
+				attribute.setName("");
 			}
 			
 			/*
@@ -467,22 +480,39 @@ public class ArcweaveJsonImporter {
 			
 			//Value Type
 			String valueTypeName = valueObject.getString("type");
-			RawAttributeValue.Type valueType = RawAttributeValue.Type.get(valueTypeName);
+			
+			AttributeValue.Type valueType = AttributeValue.Type.get(valueTypeName);
 			value.setValueType(valueType);
 			
 			//Value data
-			if (valueType == RawAttributeValue.Type.STRING) {
-				value.setData(valueObject.getString("data"));
+			if (valueObject.get("data").getValueType() != ValueType.NULL) {
+
+				//String content
+				if (valueType == AttributeValue.Type.STRING) {
+					value.setData(valueObject.getString("data"));
+				}
+
+				//Component list IDs
+				if (valueType == AttributeValue.Type.COMPONENT_LIST) {
+					JsonArray valueData = valueObject.getJsonArray("data");
+					String[] values = new String[valueData.size()];
+
+					for (int i = 0; i < valueData.size(); i++) {
+						values[i] = valueData.getString(i);
+					}
+					
+					value.setData(values);
+				}
+
+			} else {
+				//If value data content is null, set it to an empty string
+				value.setData(new String[] { "" });
 			}
 			
-			if (valueType == RawAttributeValue.Type.COMPONENT_LIST) {
-				JsonArray valueData = valueObject.getJsonArray("data");
-				String[] values = new String[valueData.size()];
-				
-				for (int i = 0; i < valueData.size(); i++) {
-					values[i] = valueData.getString(i);
-				}
-			}
+			//Set the attributes value to our newly created one
+			attribute.setValue(value);
+
+			//System.out.println("1   " + attribute.getID() + "    " + Arrays.toString(attribute.getValue().getData()));
 			
 			/*
 			 * Add attributes to project

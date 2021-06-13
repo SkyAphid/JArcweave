@@ -49,8 +49,8 @@
     "elements": {
         "17d883b5-ea07-4b75-aa6f-f3e10506de00": {
             "theme": "default",
-            "title": "<p>Player respond yes | Jumper Test<\/p>",
-            "content": "<p>Test complete.<\/p>",
+            "title": "<p>Player responds yes | Jumper Test<\/p>",
+            "content": "<p>Damn straight.<\/p>",
             "outputs": [],
             "components": [],
             "linkedBoard": null
@@ -63,15 +63,15 @@
                 "30791d27-3a7a-4eca-a47a-4a0b808089d6"
             ],
             "components": [],
-            "linkedBoard": null
+            "linkedBoard": "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c"
         },
         "f385c762-315b-44ca-9560-edc4763eb8c5": {
             "theme": "default",
-            "title": "<p><span class=\"mention mention-component\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-type=\"component\">Princess<\/span> | Starting Point<\/p>",
-            "content": "<p>'Dost thou love me?<\/p><p><\/p>",
+            "title": "<p><span class=\"mention mention-component\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-type=\"component\">Princess<\/span> | <span class=\"mention mention-component\" data-id=\"e906ba34-1800-453e-8a3e-fd083e6f8fd4\" data-type=\"component\">Second Link Test<\/span> | <span class=\"mention mention-component\" data-id=\"423d1ac2-b12d-4a27-8331-7bd272e0c065\" data-type=\"component\">Third Link Test<\/span> | Starting Point<\/p>",
+            "content": "<p>'Dost thou love me?<\/p>",
             "outputs": [
-                "1514a4e1-9c5b-4b82-af70-60fc88807ed4",
-                "780bb852-9de7-4901-98b5-19f89c770ef8"
+                "780bb852-9de7-4901-98b5-19f89c770ef8",
+                "1514a4e1-9c5b-4b82-af70-60fc88807ed4"
             ],
             "components": [
                 "7362bb13-ae4d-4956-8433-dd9a36a3b827"
@@ -119,12 +119,18 @@
             "name": "ComponentListTestObject",
             "attributes": []
         },
+        "423d1ac2-b12d-4a27-8331-7bd272e0c065": {
+            "name": "Third Link Test",
+            "attributes": []
+        },
         "65005bda-15d0-41c5-867f-68c118829f08": {
             "name": "Root",
             "root": true,
             "children": [
                 "fa026a43-d4a1-440c-bcf5-a72066d081d8",
-                "08047210-6287-4c8e-86f6-de4f55d749b2"
+                "08047210-6287-4c8e-86f6-de4f55d749b2",
+                "e906ba34-1800-453e-8a3e-fd083e6f8fd4",
+                "423d1ac2-b12d-4a27-8331-7bd272e0c065"
             ]
         },
         "7362bb13-ae4d-4956-8433-dd9a36a3b827": {
@@ -134,6 +140,12 @@
                 "de7f78bf-3ef4-43d3-8822-02c801512d54",
                 "a7cdc128-febc-4eea-a8c3-62817eded92b",
                 "12fb5c6b-73c2-4306-8443-4785894d0549"
+            ]
+        },
+        "e906ba34-1800-453e-8a3e-fd083e6f8fd4": {
+            "name": "Second Link Test",
+            "attributes": [
+                "36d8e643-4998-4e5a-81ce-7cb4770f06a4"
             ]
         },
         "fa026a43-d4a1-440c-bcf5-a72066d081d8": {
@@ -148,6 +160,13 @@
             "name": "Name",
             "value": {
                 "data": "Princess",
+                "type": "string"
+            }
+        },
+        "36d8e643-4998-4e5a-81ce-7cb4770f06a4": {
+            "name": null,
+            "value": {
+                "data": null,
                 "type": "string"
             }
         },

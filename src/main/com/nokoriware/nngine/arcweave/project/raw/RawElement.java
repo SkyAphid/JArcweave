@@ -9,8 +9,10 @@ public class RawElement extends Carrier {
 	private String title;
 	private String content;
 	
-	private ArrayList<String> connectionIDs = new ArrayList<>();
+	private ArrayList<String> connectionOutputIDs = new ArrayList<>();
 	private ArrayList<String> componentIDs = new ArrayList<>();
+	
+	private String linkedBoardID;
 
 	public RawElement(String id) {
 		super(id);
@@ -32,12 +34,20 @@ public class RawElement extends Carrier {
 		this.content = content;
 	}
 
-	public ArrayList<String> getConnectionIDs() {
-		return connectionIDs;
+	public ArrayList<String> getConnectionOutputIDs() {
+		return connectionOutputIDs;
 	}
 
 	public ArrayList<String> getComponentIDs() {
 		return componentIDs;
 	}
 
+	public String getLinkedBoardID() {
+		return linkedBoardID;
+	}
+
+	public void setLinkedBoardID(String linkedBoardID) {
+		this.linkedBoardID = linkedBoardID;
+	}
+	
 }

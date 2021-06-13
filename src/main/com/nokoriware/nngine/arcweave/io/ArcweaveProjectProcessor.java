@@ -1,10 +1,11 @@
 package com.nokoriware.nngine.arcweave.io;
 
 import com.nokoriware.nngine.arcweave.project.raw.*;
+import com.nokoriware.nngine.arcweave.project.util.ArcweaveXMLUtility;
+
 import static com.nokoriware.nngine.arcweave.project.util.ArcweaveXMLUtility.*;
 
 import java.util.ArrayList;
-
 import com.nokoriware.nngine.arcweave.project.processed.*;
 
 /**
@@ -12,7 +13,7 @@ import com.nokoriware.nngine.arcweave.project.processed.*;
  */
 public class ArcweaveProjectProcessor {
 
-	/*
+	/**
 	 * This function will process a <code>RawArcweaveProject</code> into a <code>ArcweaveProject</code>.
 	 * <br>Processed ArcweaveProject's are connected by object references rather than IDs, making their usage much easier. However, both options are available to suit any particular usecase.
 	 */
@@ -26,14 +27,22 @@ public class ArcweaveProjectProcessor {
 	}
 	
 	private static void processBoards(RawArcweaveProject rawProject, ArcweaveProject project) {
-		firstPass(rawProject, project);
-		secondPass(rawProject, project);
+		copyDataPass(rawProject, project);
+		linkObjectsPass(rawProject, project);
 	}
 	
-	/*
-	 * The first pass will create all of the objects in the project and copy their content, however it won't link the object references quite yet.
+	/**
+	 * This first pass will create all of the objects in the project and copy their content, adding them to the <code>ArcweaveProject</code>.
+	 * However, none of these objects have their actual references added yet. That is reserved for the second pass.
 	 */
-	private static void firstPass(RawArcweaveProject rawProject, ArcweaveProject project) {
+	private static void copyDataPass(RawArcweaveProject rawProject, ArcweaveProject project) {
+		/*
+		 * General project information
+		 */
+		
+		project.setName(rawProject.getName());
+		project.setCover(rawProject.getCover());
+		
 		/*
 		 * Boards
 		 */
@@ -72,6 +81,7 @@ public class ArcweaveProjectProcessor {
 			RawElement rawElement = rawElements.get(i);
 			
 			Element element = new Element(rawElement.getID());
+			//TODO: Add processing for links in the title
 			element.setTitle(removeParagraphTags(rawElement.getTitle()));
 			element.setContent(removeParagraphTags(rawElement.getContent()));
 			
@@ -102,7 +112,12 @@ public class ArcweaveProjectProcessor {
 			
 			Connection connection = new Connection(rawConnection.getID());
 			
+			//Label
 			connection.setLabel(removeParagraphTags(rawConnection.getLabel()));
+			
+			//Source/target types
+			connection.setSourceType(rawConnection.getSourceType());
+			connection.setTargetType(rawConnection.getTargetType());
 			
 			project.getConnections().add(connection);
 		}
@@ -116,9 +131,13 @@ public class ArcweaveProjectProcessor {
 		for (int i = 0; i < rawComponents.size(); i++) {
 			RawComponent rawComponent = rawComponents.get(i);
 			
+			//copy data
 			Component component = new Component(rawComponent.getID());
 			component.setName(rawComponent.getName());
 			component.setRoot(rawComponent.isRoot());
+			
+			//add to project
+			project.getComponents().add(component);
 		}
 		
 		/*
@@ -138,9 +157,22 @@ public class ArcweaveProjectProcessor {
 			RawAttributeValue rawValue = rawAttribute.getValue();
 			
 			AttributeValue value = new AttributeValue();
-			value.setValueType(rawValue.getValueType());
+			
+			//System.out.println("2   " + rawAttribute.getID() + " " + Arrays.toString(rawValue.getData()));
+			
+			//Value Type
+			AttributeValue.Type type = rawValue.getValueType();
+			value.setValueType(type);
+			
+			//If the AttributeValue only contains string content, copy that data over. If references, save that for the second pass.
+			if (type == AttributeValue.Type.STRING) {
+				value.setContent(removeParagraphTags(rawValue.getData()[0]));
+			}
 			
 			attribute.setValue(value);
+			
+			//Add attribute to project
+			project.getAttributes().add(attribute);
 		}
 		
 		/*
@@ -156,10 +188,18 @@ public class ArcweaveProjectProcessor {
 		 */
 	}
 
-	/*
-	 * The second pass will begin searching the projects and linking the various data together with true object references, allowing their usage to be much simpler in the end.
+	/**
+	 * This second pass will begin searching the projects and linking the various data together with true object references, allowing their usage to be much simpler for general programming.
+	 * <br><br>Some elements, such as Notes, do not need the second pass because they do not contain references to other objects.
 	 */
-	private static void secondPass(RawArcweaveProject rawProject, ArcweaveProject project) {
+	private static void linkObjectsPass(RawArcweaveProject rawProject, ArcweaveProject project) {
+		
+		/*
+		 * Starting Element
+		 */
+		
+		project.setStartingElement(project.getElement(rawProject.getStartingElementID()));
+		
 		/*
 		 * Boards
 		 */
@@ -168,54 +208,197 @@ public class ArcweaveProjectProcessor {
 		
 		for (int i = 0; i < boards.size(); i++) {
 			Board board = boards.get(i);
+			RawBoard rawBoard = rawProject.getBoard(board.getID());
 			
 			//Notes
+			ArrayList<String> rawNoteIDs = rawBoard.getNoteIDs();
 			
+			for (int j = 0; j < rawNoteIDs.size(); j++) {
+				String noteID = rawNoteIDs.get(j);
+				board.getNotes().add(project.getNote(noteID));
+			}
 			
 			//Jumpers
+			ArrayList<String> rawJumperIDs = rawBoard.getJumperIDs();
+			
+			for (int j = 0; j < rawJumperIDs.size(); j++) {
+				String jumperID = rawJumperIDs.get(j);
+				board.getJumpers().add(project.getJumper(jumperID));
+			}
 			
 			//TODO Branches
 			
 			//Elements
+			ArrayList<String> rawElementIDs = rawBoard.getElementIDs();
+			
+			for (int j = 0; j < rawElementIDs.size(); j++) {
+				String elementID = rawElementIDs.get(j);
+				board.getElements().add(project.getElement(elementID));
+			}
 			
 			//Connections
+			ArrayList<String> rawConnectionIDs = rawBoard.getConnectionIDs();
+			
+			for (int j = 0; j < rawConnectionIDs.size(); j++) {
+				String connectionID = rawConnectionIDs.get(j);
+				board.getConnections().add(project.getConnection(connectionID));
+			}
 		}
-		
-		/*
-		 * Notes
-		 */
-		
-		
 		
 		/*
 		 * Elements
 		 */
 		
+		ArrayList<Element> elements = project.getElements();
 		
+		for (int i = 0; i < elements.size(); i++) {
+			Element element = elements.get(i);
+			RawElement rawElement = rawProject.getElement(element.getID());
+			
+			//Title links
+			ArcweaveXMLUtility.linkElementTitleComponents(project, element);
+			
+			//Connection Outputs
+			ArrayList<String> rawConnectionOutputIDs = rawElement.getConnectionOutputIDs();
+			
+			for (int j = 0; j < rawConnectionOutputIDs.size(); j++) {
+				String connectionID = rawConnectionOutputIDs.get(j);
+				Connection connection = project.getConnection(connectionID);
+				
+				element.getConnectionOutputs().add(connection);
+			}
+			
+			//Components
+			ArrayList<String> rawComponentIDs = rawElement.getComponentIDs();
+			
+			for (int j = 0; j < rawComponentIDs.size(); j++) {
+				String componentID = rawComponentIDs.get(j);
+				element.getComponents().add(project.getComponent(componentID));
+			}
+			
+			//Linked Boards
+			String linkedBoardID = rawElement.getLinkedBoardID();
+			element.setLinkedBoard(project.getBoard(linkedBoardID));
+		}
 		
 		/*
 		 * Jumpers
 		 */
 		
+		ArrayList<Jumper> jumpers = project.getJumpers();
 		
+		for (int i = 0; i < jumpers.size(); i++) {
+			Jumper jumper = jumpers.get(i);
+			RawJumper rawJumper = rawProject.getJumper(jumper.getID());
+			
+			//Element ID
+			String elementID = rawJumper.getElementID();
+			jumper.setElement(project.getElement(elementID));
+		}
 
 		/*
 		 * Connections
 		 */
 		
+		ArrayList<Connection> connections = project.getConnections();
 		
+		for (int i = 0; i < connections.size(); i++) {
+			Connection connection = connections.get(i);
+			RawConnection rawConnection = rawProject.getConnection(connection.getID());
+			
+			//System.err.println(connection.getSourceType() + " " + connection.getTargetType());
+			
+			//Link source elements
+			if (connection.getSourceType() == Connection.Type.ELEMENTS) {
+				String sourceElementID = rawConnection.getSourceID();
+				connection.setSourceElement(project.getElement(sourceElementID));
+			}
+
+			//Link jumper elements to source
+			if (connection.getSourceType() == Connection.Type.JUMPERS) {
+				String sourceJumperID = rawConnection.getSourceID();
+				Jumper sourceJumper = project.getJumper(sourceJumperID);
+				
+				connection.setSourceElement(sourceJumper.getElement());
+			}
+			
+			//Link target elements
+			if (connection.getTargetType() == Connection.Type.ELEMENTS) {
+				String targetID = rawConnection.getTargetID();
+				connection.setTargetElement(project.getElement(targetID));
+			}
+			
+			//Link jumper elements to targets
+			if (connection.getTargetType() == Connection.Type.JUMPERS) {
+				String targetJumperID = rawConnection.getTargetID();
+				Jumper targetJumper = project.getJumper(targetJumperID);
+				
+				connection.setTargetElement(targetJumper.getElement());
+			}
+
+			
+			//System.err.println(connection.getID() + " " + connection.getSourceElement().getID() + " " + (connection.getTargetElement() != null ? connection.getTargetElement().getID() : "No target"));
+			
+		}
 		
 		/*
 		 * Components
 		 */
 		
+		ArrayList<Component> components = project.getComponents();
 		
+		for (int i = 0; i < components.size(); i++) {
+			Component component = components.get(i);
+			RawComponent rawComponent = rawProject.getComponent(component.getID());
+			
+			//Children
+			ArrayList<String> childrenIDs = rawComponent.getChildrenIDs();
+			
+			for (int j = 0; j < childrenIDs.size(); j++) {
+				String childID = childrenIDs.get(j);
+				component.getChildren().add(project.getComponent(childID));
+			}
+			
+			//Attributes
+			ArrayList<String> attributeIDs = rawComponent.getAttributeIDs();
+			
+			for (int j = 0; j < attributeIDs.size(); j++) {
+				String attributeID = attributeIDs.get(j);
+				component.getAttributes().add(project.getAttribute(attributeID));
+			}
+		}
 		
 		/*
 		 * Attributes
 		 */
 		
+		ArrayList<Attribute> attributes = project.getAttributes();
 		
+		for (int i = 0; i < attributes.size(); i++) {
+			Attribute attribute = attributes.get(i);
+			RawAttribute rawAttribute = rawProject.getAttribute(attribute.getID());
+			
+			//Attribute Values
+			AttributeValue attributeValue = attribute.getValue();
+			RawAttributeValue rawAttributeValue = rawAttribute.getValue();
+			
+			//If the AttributeValue type is a component list, then link all of those references. For string content, that is copied over during the first pass.
+			if (rawAttributeValue.getValueType() == AttributeValue.Type.COMPONENT_LIST) {
+				String[] data = rawAttributeValue.getData();
+				
+				for (int j = 0; j < data.length; j++) {
+
+					String[] rawComponentList = rawAttributeValue.getData();
+					Component[] componentList = new Component[rawComponentList.length];
+					
+					for (int k = 0; k < componentList.length; k++) {
+						componentList[k] = project.getComponent(rawComponentList[k]);
+					}
+					
+					attributeValue.setComponentList(componentList);
+				}
+			}
+		}
 		
 		/*
 		 * TODO Branches
@@ -229,4 +412,5 @@ public class ArcweaveProjectProcessor {
 		 * TODO Conditions
 		 */
 	}
+	
 }

@@ -33,11 +33,11 @@ public class ArcweaveProject {
 		this.name = name;
 	}
 
-	public Element getStartingElementID() {
+	public Element getStartingElement() {
 		return startingElement;
 	}
 
-	public void setStartingElementID(Element startingElement) {
+	public void setStartingElement(Element startingElement) {
 		this.startingElement = startingElement;
 	}
 	
