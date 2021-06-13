@@ -1,10 +1,12 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.raw;
 
-public class Jumper extends Carrier {
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
+
+public class RawJumper extends Carrier {
 	
 	private String elementID;
 
-	public Jumper(String id) {
+	public RawJumper(String id) {
 		super(id);
 	}
 

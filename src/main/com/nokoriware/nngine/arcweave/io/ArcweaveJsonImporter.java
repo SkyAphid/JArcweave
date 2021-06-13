@@ -10,10 +10,13 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue.ValueType;
 
-import com.nokoriware.nngine.arcweave.project.*;
+import com.nokoriware.nngine.arcweave.project.processed.ArcweaveProject;
+import com.nokoriware.nngine.arcweave.project.processed.Cover;
+import com.nokoriware.nngine.arcweave.project.raw.*;
 
 /**
- * This class will import an Arcweave JSON export file and convert it into an object-based system for use in java-based projects.
+ * This class will import an Arcweave JSON export file as an unprocessed set of object-based classes. 
+ * This data can then be processed into user-friendly data with one more step afterwards. Both options are available to accomodate multiple usecases.
  * 
  * <br><br>
  * Official documentation on Arcweave can be found here for more information on what exactly this importer is reading and the general terminology used:
@@ -26,6 +29,7 @@ import com.nokoriware.nngine.arcweave.project.*;
  * <br>• Branches
  * 
  */
+@SuppressWarnings("unused")
 public class ArcweaveJsonImporter {
 
 	/**
@@ -33,7 +37,7 @@ public class ArcweaveJsonImporter {
 	 * 
 	 * @throws Exception - any exceptions encountered during parsing will be reported.
 	 */
-	public static ArcweaveProject read(File f) throws Exception {
+	public static RawArcweaveProject read(File f) throws Exception {
 		FileInputStream inputStream = new FileInputStream(f);
 		return read(inputStream);
 	}
@@ -43,7 +47,7 @@ public class ArcweaveJsonImporter {
 	 * 
 	 * @throws Exception - any exceptions encountered during parsing will be reported.
 	 */
-	public static ArcweaveProject read(InputStream inputStream) throws Exception {
+	public static RawArcweaveProject read(InputStream inputStream) throws Exception {
 
 		/*
 		 * Load JSON file and prepare it for reading
@@ -57,7 +61,7 @@ public class ArcweaveJsonImporter {
 		 * Create new ArcweaveProject class
 		 */
 
-		ArcweaveProject project = new ArcweaveProject();
+		RawArcweaveProject project = new RawArcweaveProject();
 
 		/*
 		 * Begin reading the file and assigning data.
@@ -109,7 +113,7 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read the general project information, such as the name and starting element.
 	 */
-	public static void readGeneralInformation(JsonObject projectObject, ArcweaveProject project) {
+	private static void readGeneralInformation(JsonObject projectObject, RawArcweaveProject project) {
 		//The name of the project
 		String projectName = projectObject.getString("name");
 		project.setName(projectName);
@@ -129,8 +133,9 @@ public class ArcweaveJsonImporter {
 	
 	/**
 	 * Read the project cover information. This is the image you can assign to Arcweave projects.
+	 * The cover does not need to be processed due to its simplicity.
 	 */
-	public static void readCover(JsonObject projectObject, ArcweaveProject project) {
+	private static void readCover(JsonObject projectObject, RawArcweaveProject project) {
 		if (projectObject.get("cover").getValueType() != ValueType.NULL) {
 			
 			JsonObject coverObject = projectObject.getJsonObject("cover");
@@ -158,7 +163,7 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read the project board information. A board is where exchanges of dialogue are located.
 	 */
-	public static void readBoards(JsonObject projectObject, ArcweaveProject project) {
+	private static void readBoards(JsonObject projectObject, RawArcweaveProject project) {
 
 		JsonObject boards = projectObject.getJsonObject("boards");
 
@@ -167,7 +172,7 @@ public class ArcweaveJsonImporter {
 			JsonObject boardObject = boardValue.asJsonObject();
 
 			//Create board
-			Board board = new Board(boardID);
+			RawBoard board = new RawBoard(boardID);
 			
 			//Board name
 			String boardName = boardObject.getString("name");
@@ -241,13 +246,13 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read the project notes. Notes can be placed on boards to help keep things organized while working on a project.
 	 */
-	public static void readNotes(JsonObject projectObject, ArcweaveProject project) {
+	private static void readNotes(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject notes = projectObject.getJsonObject("notes");
 
 		notes.forEach((noteID, noteValue) -> {
 
 			// create note
-			Note note = new Note(noteID);
+			RawNote note = new RawNote(noteID);
 
 			// load content
 			JsonObject noteObject = noteValue.asJsonObject();
@@ -263,13 +268,13 @@ public class ArcweaveJsonImporter {
 	/*
 	 * Read the project elements. Elements are the dialogue nodes that contain your dialogue.
 	 */
-	public static void readElements(JsonObject projectObject, ArcweaveProject project) {
+	private static void readElements(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject elements = projectObject.getJsonObject("elements");
 
 		elements.forEach((elementID, elementValue) -> {
 
 			// create element
-			Element element = new Element(elementID);
+			RawElement element = new RawElement(elementID);
 
 			// load data
 			JsonObject elementObject = elementValue.asJsonObject();
@@ -309,13 +314,13 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read the general project jumpers. Jumpers are links that can be placed on boards to allow dialogue to jump to elements on other boards.
 	 */
-	public static void readJumpers(JsonObject projectObject, ArcweaveProject project) {
+	private static void readJumpers(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject jumpers = projectObject.getJsonObject("jumpers");
 
 		jumpers.forEach((jumperID, jumperValue) -> {
 
 			// create jumper
-			Jumper jumper = new Jumper(jumperID);
+			RawJumper jumper = new RawJumper(jumperID);
 
 			// get element ID of what it jumps to
 			JsonObject jumperObject = jumperValue.asJsonObject();
@@ -332,7 +337,7 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read connections. These connect elements together to form the various paths of your dialogue.
 	 */
-	public static void readConnections(JsonObject projectObject, ArcweaveProject project) {
+	private static void readConnections(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject connections = projectObject.getJsonObject("connections");
 
 		connections.forEach((connectionID, connectionValue) -> {
@@ -340,7 +345,7 @@ public class ArcweaveJsonImporter {
 			JsonObject connectionObject = connectionValue.asJsonObject();
 
 			// create connection
-			Connection connection = new Connection(connectionID);
+			RawConnection connection = new RawConnection(connectionID);
 
 			// label
 			if (connectionObject.get("label").getValueType() != ValueType.NULL) {
@@ -361,12 +366,12 @@ public class ArcweaveJsonImporter {
 
 			// source type
 			String sourceTypeID = connectionObject.getString("sourceType");
-			Connection.Type sourceType = Connection.Type.get(sourceTypeID);
+			RawConnection.Type sourceType = RawConnection.Type.get(sourceTypeID);
 			connection.setSourceType(sourceType);
 
 			// target type
 			String targetTypeID = connectionObject.getString("targetType");
-			Connection.Type targetType = Connection.Type.get(targetTypeID);
+			RawConnection.Type targetType = RawConnection.Type.get(targetTypeID);
 			connection.setTargetType(targetType);
 
 			//Add connections to project
@@ -377,7 +382,7 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read components. Components are draggable identifiers that contain attributes (information/data).
 	 */
-	public static void readComponents(JsonObject projectObject, ArcweaveProject project) {
+	private static void readComponents(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject components = projectObject.getJsonObject("components");
 
 		components.forEach((componentID, componentValue) -> {
@@ -385,7 +390,7 @@ public class ArcweaveJsonImporter {
 			JsonObject componentObject = componentValue.asJsonObject();
 			
 			//Create component
-			Component component = new Component(componentID);
+			RawComponent component = new RawComponent(componentID);
 			
 			//Component Name
 			String name = componentObject.getString("name");
@@ -433,7 +438,7 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read attributes. Attributes are the data contained within components.
 	 */
-	public static void readAttributes(JsonObject projectObject, ArcweaveProject project) {
+	private static void readAttributes(JsonObject projectObject, RawArcweaveProject project) {
 		JsonObject attributes = projectObject.getJsonObject("attributes");
 		
 		attributes.forEach((attributeID, attributeValue) -> {
@@ -444,7 +449,7 @@ public class ArcweaveJsonImporter {
 			 * Attribute
 			 */
 			
-			Attribute attribute = new Attribute(attributeID);
+			RawAttribute attribute = new RawAttribute(attributeID);
 			
 			//Attribute name
 			if (attributeObject.get("name").getValueType() != ValueType.NULL) {
@@ -458,19 +463,19 @@ public class ArcweaveJsonImporter {
 			
 			JsonObject valueObject = attributeObject.getJsonObject("value");
 			
-			AttributeValue value = new AttributeValue();
+			RawAttributeValue value = new RawAttributeValue();
 			
 			//Value Type
 			String valueTypeName = valueObject.getString("type");
-			AttributeValue.Type valueType = AttributeValue.Type.get(valueTypeName);
+			RawAttributeValue.Type valueType = RawAttributeValue.Type.get(valueTypeName);
 			value.setValueType(valueType);
 			
 			//Value data
-			if (valueType == AttributeValue.Type.STRING) {
+			if (valueType == RawAttributeValue.Type.STRING) {
 				value.setData(valueObject.getString("data"));
 			}
 			
-			if (valueType == AttributeValue.Type.COMPONENT_LIST) {
+			if (valueType == RawAttributeValue.Type.COMPONENT_LIST) {
 				JsonArray valueData = valueObject.getJsonArray("data");
 				String[] values = new String[valueData.size()];
 				
@@ -491,21 +496,22 @@ public class ArcweaveJsonImporter {
 	/**
 	 * Read branches. TODO
 	 */
-	public static void readBranches(JsonObject projectObject, ArcweaveProject project) {
+
+	private static void readBranches(JsonObject projectObject, RawArcweaveProject project) {
 		
 	}
 	
 	/**
 	 * Read variables. TODO
 	 */
-	public static void readVariables(JsonObject projectObject, ArcweaveProject project) {
+	private static void readVariables(JsonObject projectObject, RawArcweaveProject project) {
 		
 	}
 	
 	/**
 	 * Read conditions. TODO
 	 */
-	public static void readConditions(JsonObject projectObject, ArcweaveProject project) {
+	private static void readConditions(JsonObject projectObject, RawArcweaveProject project) {
 		
 	}
 	

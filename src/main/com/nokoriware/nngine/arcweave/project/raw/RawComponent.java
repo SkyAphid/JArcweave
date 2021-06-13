@@ -1,8 +1,10 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.raw;
 
 import java.util.ArrayList;
 
-public class Component extends Carrier {
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
+
+public class RawComponent extends Carrier {
 	
 	private String name;
 	private boolean isRoot;
@@ -10,7 +12,7 @@ public class Component extends Carrier {
 	private ArrayList<String> attributeIDs = new ArrayList<>();
 	private ArrayList<String> childrenIDs = new ArrayList<>();
 
-	public Component(String id) {
+	public RawComponent(String id) {
 		super(id);
 	}
 

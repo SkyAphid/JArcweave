@@ -1,6 +1,7 @@
 package com.nokoriware.arcweave.test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -8,7 +9,11 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.nokoriware.nngine.arcweave.io.ArcweaveJsonImporter;
-import com.nokoriware.nngine.arcweave.project.ArcweaveProject;
+import com.nokoriware.nngine.arcweave.io.ArcweaveProjectProcessor;
+import com.nokoriware.nngine.arcweave.project.*;
+import com.nokoriware.nngine.arcweave.project.processed.ArcweaveProject;
+import com.nokoriware.nngine.arcweave.project.raw.RawArcweaveProject;
+import com.nokoriware.nngine.arcweave.project.raw.RawElement;
 
 public class JArcweaveHelloWorldExample {
 	public static void main(String[] args) {
@@ -43,8 +48,11 @@ public class JArcweaveHelloWorldExample {
         	 */
         	
     		try {
-    			ArcweaveProject project = ArcweaveJsonImporter.read(f);
+    			RawArcweaveProject rawProject = ArcweaveJsonImporter.read(f);
+    			ArcweaveProject project = ArcweaveProjectProcessor.process(rawProject);
+
     			basicDialogueProgram(project);
+    			
     		} catch (Exception e) {
     			e.printStackTrace();
     		}
@@ -55,10 +63,38 @@ public class JArcweaveHelloWorldExample {
 	}
 	
 	public static void basicDialogueProgram(ArcweaveProject project) {
-		System.out.println("Beginning dialogue test. The selected project is \"" + project.getName() + ".\"");
+		
+		/*
+		 * Welcome text
+		 */
+		
+		System.out.println("Beginning dialogue test."
+				+ "\n\nThe selected project is \"" + project.getName() + ".\""
+				+ "\nThe dialogue will begin at the Starting Element.\n\n");
+		
+		/*
+		 * Begin dialogue
+		 */
+		
 		Scanner scanner = new Scanner(System.in);
-
-		String response = scanner.nextLine(); // Read user input
+		
+		/*RawElement nextElement = project.getElement(project.getStartingElementID());
+		
+		while (nextElement != null) {
+			System.out.println(nextElement.getContent());
+			
+			if (nextElement.getConnectionIDs().isEmpty()) {
+				
+				
+			}
+			
+			String response = scanner.nextLine(); // Read user input
+			
+		}*/
+		
+		/*
+		 * Close Program
+		 */
 		
 		System.out.println("End of dialogue. Terminating.");
 		scanner.close();

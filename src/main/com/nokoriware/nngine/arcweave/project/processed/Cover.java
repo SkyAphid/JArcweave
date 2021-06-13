@@ -1,12 +1,11 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.processed;
 
-public class AttributeValue {
+public class Cover {
+	private String fileName;
 	
-	private String[] data;
-
+	//This list may be incomplete, I'm unsure of what other covers you can have besides a cover image.
 	public enum Type {
-		STRING("string"),
-		COMPONENT_LIST("component-list");
+		COVER_IMAGE("cover-image");
 		
 		private String typeName;
 		
@@ -24,7 +23,7 @@ public class AttributeValue {
 		}
 		
 		/**
-		 * Returns the Attribute Value Type enum based on its string name counterpart present in the Arcweave JSON files.
+		 * Returns the Cover Type enum based on its string name counterpart present in the Arcweave JSON files.
 		 */
 		public static Type get(String typeStringName) {
 			for (int i = 0; i < values.length; i++) {
@@ -37,22 +36,22 @@ public class AttributeValue {
 		}
 	}
 	
-	private Type valueType;
+	private Type type;
 
-	public String[] getData() {
-		return data;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setData(String... data) {
-		this.data = data;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	public Type getValueType() {
-		return valueType;
+	public Type getType() {
+		return type;
 	}
 
-	public void setValueType(Type valueType) {
-		this.valueType = valueType;
+	public void setType(Type type) {
+		this.type = type;
 	}
 	
 }

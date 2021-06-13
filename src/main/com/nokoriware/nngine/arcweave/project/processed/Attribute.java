@@ -1,14 +1,16 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.processed;
+
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
 
 public class Attribute extends Carrier {
-	
+
 	private String name;
 	private AttributeValue value;
 
 	public Attribute(String id) {
 		super(id);
 	}
-
+	
 	public String getName() {
 		return name;
 	}

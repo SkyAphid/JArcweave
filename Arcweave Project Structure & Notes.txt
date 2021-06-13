@@ -1,6 +1,7 @@
 Project
 -Name
 -Starting Element
+-Cover (Image)
 
 -Boards (ID and data)
 	-Notes (tied by ID)
@@ -36,3 +37,14 @@ I've written JArcweave to try and take this concept and convert it into an objec
 Notes on root objects:
 
 "It's the unique item with no parent, all items that do not belong in a folder are children of the root item. It's basically the invisible "root" folder."
+
+----
+
+Adding new functionality to JArcweave:
+
+-Parse the JSON into a RawArcweaveProject and add the new data types
+	-Add the proper RawX data objects
+-Add a processor for it to ArcweaveProject and add the new data types
+	-Add the proper X data objects
+-???
+-Profit

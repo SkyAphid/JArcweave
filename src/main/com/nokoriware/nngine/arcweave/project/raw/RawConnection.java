@@ -1,6 +1,8 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.raw;
 
-public class Connection extends Carrier {
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
+
+public class RawConnection extends Carrier {
 	
 	private String label;
 	private String sourceID;
@@ -42,7 +44,7 @@ public class Connection extends Carrier {
 	private Type sourceType;
 	private Type targetType;
 
-	public Connection(String id) {
+	public RawConnection(String id) {
 		super(id);
 	}
 

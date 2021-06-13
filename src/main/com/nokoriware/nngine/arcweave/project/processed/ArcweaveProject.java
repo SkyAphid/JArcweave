@@ -1,11 +1,17 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.processed;
 
 import java.util.ArrayList;
 
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
+
+/**
+ * This is a fully processed Arcweave Project. Instead of everything being tied to IDs, all data has been tied to actual Java objects instead with proper references.
+ * Thanks to this, working on a project with an end-user in mind is much easier.
+ */
 public class ArcweaveProject {
 
 	private String name;
-	private String startingElementID;
+	private Element startingElement;
 	
 	private Cover cover;
 
@@ -27,12 +33,12 @@ public class ArcweaveProject {
 		this.name = name;
 	}
 
-	public String getStartingElementID() {
-		return startingElementID;
+	public Element getStartingElementID() {
+		return startingElement;
 	}
 
-	public void setStartingElementID(String startingElementID) {
-		this.startingElementID = startingElementID;
+	public void setStartingElementID(Element startingElement) {
+		this.startingElement = startingElement;
 	}
 	
 	/*
@@ -56,33 +62,32 @@ public class ArcweaveProject {
 	}
 	
 	public Board getBoard(String ID) {
-		return (Board) getCarrier(boards, ID);
+		return (Board) Carrier.getCarrier(boards, ID);
 	}
 	
 	/*
 	 * Notes
 	 */
 	
-
 	public ArrayList<Note> getNotes() {
 		return notes;
 	}
 	
 	public Note getNote(String ID) {
-		return (Note) getCarrier(notes, ID);
+		return (Note) Carrier.getCarrier(notes, ID);
 	}
+	
 	
 	/*
 	 * Elements
 	 */
-	
 
 	public ArrayList<Element> getElements() {
 		return elements;
 	}
 	
 	public Element getElement(String ID) {
-		return (Element) getCarrier(elements, ID);
+		return (Element) Carrier.getCarrier(elements, ID);
 	}
 	
 	/*
@@ -94,60 +99,43 @@ public class ArcweaveProject {
 	}
 	
 	public Jumper getJumper(String ID) {
-		return (Jumper) getCarrier(jumpers, ID);
+		return (Jumper) Carrier.getCarrier(jumpers, ID);
 	}
 	
 	/*
 	 * Connections
 	 */
-	
 
 	public ArrayList<Connection> getConnections() {
 		return connections;
 	}
 	
 	public Connection getConnection(String ID) {
-		return (Connection) getCarrier(connections, ID);
+		return (Connection) Carrier.getCarrier(connections, ID);
 	}
 	
 	/*
 	 * Components
 	 */
 	
-
 	public ArrayList<Component> getComponents() {
 		return components;
 	}
 	
 	public Component getComponent(String ID) {
-		return (Component) getCarrier(components, ID);
+		return (Component) Carrier.getCarrier(components, ID);
 	}
 	
 	/*
 	 * Attributes
 	 */
 	
-
 	public ArrayList<Attribute> getAttributes() {
 		return attributes;
 	}
 	
 	public Attribute getAttribute(String ID) {
-		return (Attribute) getCarrier(attributes, ID);
+		return (Attribute) Carrier.getCarrier(attributes, ID);
 	}
-	
-	/**
-	 * Returns a <code>Carrier</code> from a list of <code>Carrier</code> objects that has the given ID. 
-	 * <br><br>
-	 * Example: <code>getCarrier(getNotes(), "id");</code>
-	 */
-	public Carrier getCarrier(ArrayList<? extends Carrier> carriers, String ID){
-		for (int i = 0; i < carriers.size(); i++) {
-			if (carriers.get(i).getID().equals(ID)) {
-				return carriers.get(i);
-			}
-		}
-		
-		return null;
-	}
+
 }

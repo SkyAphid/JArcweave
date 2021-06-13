@@ -1,8 +1,10 @@
-package com.nokoriware.nngine.arcweave.project;
+package com.nokoriware.nngine.arcweave.project.raw;
 
 import java.util.ArrayList;
 
-public class Board extends Carrier {
+import com.nokoriware.nngine.arcweave.project.util.Carrier;
+
+public class RawBoard extends Carrier {
 	
 	private String name;
 	
@@ -12,7 +14,7 @@ public class Board extends Carrier {
 	private ArrayList<String> elementIDs = new ArrayList<>();
 	private ArrayList<String> connectionIDs = new ArrayList<>();
 	
-	public Board(String id) {
+	public RawBoard(String id) {
 		super(id);
 	}
 
@@ -24,6 +26,10 @@ public class Board extends Carrier {
 		this.name = name;
 	}
 
+	/*
+	 * IDs - these are stored permanently
+	 */
+	
 	public ArrayList<String> getNoteIDs() {
 		return noteIDs;
 	}
