@@ -13,6 +13,9 @@ import com.nokoriware.nngine.arcweave.io.ArcweaveProjectProcessor;
 import com.nokoriware.nngine.arcweave.project.processed.*;
 import com.nokoriware.nngine.arcweave.project.raw.*;
 
+/**
+ * This basic program will allow you to select an Arcweave JSON export, load it, and interact with it via the console.
+ */
 public class JArcweaveHelloWorldExample {
 	
 	public static void main(String[] args) {
@@ -21,6 +24,7 @@ public class JArcweaveHelloWorldExample {
 		/*
 		 * Set look and feel because I'm OCD
 		 */
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -30,6 +34,7 @@ public class JArcweaveHelloWorldExample {
 		/*
 		 * Select the Arcweave file to test.
 		 */
+		
         JFileChooser chooser = new JFileChooser();
         
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));

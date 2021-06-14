@@ -69,7 +69,7 @@ public class ArcweaveXMLUtility {
 			
 			String newTitle = title.replaceFirst(spanSubstring, "").replaceFirst(SPAN_END, "");
 			element.setTitle(newTitle);
-			System.err.println("Result: " + element.getTitle() + "\n");
+			//System.err.println("Result: " + element.getTitle() + "\n");
 		}
 		
 	}
