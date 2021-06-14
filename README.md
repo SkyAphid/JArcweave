@@ -11,7 +11,7 @@ JArcweave is an API built to help with importing exported JSON files from the [A
 - Text document included which summarizes the Arcweave JSON format, along with tips on expanding JArcweave's functionality
 
 ## Example File
-- [JArcweave Hello World](https://github.com/SkyAphid/JArcweaveImporter/blob/master/src/test/com/nokoriware/arcweave/test/JArcweaveHelloWorldExample.java): a basic Hello World program that lets you test out exported JSON files
+- [Hello World](https://github.com/SkyAphid/JArcweaveImporter/blob/master/src/test/com/nokoriware/arcweave/test/JArcweaveHelloWorldExample.java): a basic Hello World program that lets you test out exported JSON files
 
 ## Unsupported Functionality
 Below are aspects of JArcweave that are not yet implemented. Unless noted otherwise, the functionality will eventually be added.
