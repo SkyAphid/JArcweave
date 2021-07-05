@@ -1,4 +1,4 @@
-# JArcweave Importer
+# JArcweave
 JArcweave is an API built to help with importing exported JSON files from the [Arcweave](arcweave.com) dialogue editing program. Additionally, it was built and documented to act as a learning tool for those interested in making their own Arcweave importers for various programming languages.
 
 ![Screenshot 2021-06-13 201144](https://user-images.githubusercontent.com/6147299/121827991-c56d7880-cc83-11eb-8c0a-a0b44ceedcd8.jpg)
