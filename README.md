@@ -1,7 +1,7 @@
 
 ![jarcweave logo inverted](https://user-images.githubusercontent.com/6147299/124512214-75269980-dd9d-11eb-9567-ace9ae00a4bd.png)
 
-**JArcweave** is an API built to read exported JSON files from the [Arcweave](arcweave.com) dialogue editing program into Java-based software. Additionally, this API is designed to also act as a documented learning tool for those interested in making their own Arcweave importers for various other programming languages.
+**JArcweave** is an API built to read exported JSON files from the [Arcweave](arcweave.com) dialogue editing program. This allows the user to import projects from Arcweave and use it in their projects. Additionally, this API is designed to also act as a documented learning tool for those interested in making their own Arcweave importers for various other programming languages.
 
 ![Screenshot 2021-06-13 201144](https://user-images.githubusercontent.com/6147299/121827991-c56d7880-cc83-11eb-8c0a-a0b44ceedcd8.jpg)
 
