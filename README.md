@@ -7,9 +7,9 @@
 
 ## Features
 - Arcweave JSON Project importing: load Arcweave files into Java as a "raw" format where all of the data is preserved as is
-- Arcweave Project "processing": projects can be converted with a single line into a more Java-friendly format where all of the produced Java objects are referenced directly rather than by String ID
-- Basic example included for using the API
-- Fully documented
+- Arcweave Project "processing": projects can be converted with a single line into a more object-based java-friendly format where all objects are referenced by references rather than string IDs.
+- A basic example program included for testing and learning how to use the API
+- All classes in the project are fully documented
 - Text document included which summarizes the Arcweave JSON format, along with tips on expanding JArcweave's functionality
 
 ## Example File
