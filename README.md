@@ -16,9 +16,9 @@
 - [Hello World](https://github.com/SkyAphid/JArcweaveImporter/blob/master/src/test/com/nokoriware/arcweave/test/JArcweaveHelloWorldExample.java): a basic Hello World program that lets you test out exported JSON files
 
 ## Unsupported Functionality
-Below are aspects of JArcweave that are not yet implemented. Unless noted otherwise, the functionality will eventually be added.
+Below is functionality from Arcweave that is omitted by this parser. This is due to those features being either unapplicable or due to the fact it would take a great deal of time to implemented and maintain.
 
-- Assets: This functionality will likely not be added since there is not much use for it in my own applications
+- Assets
 - Variables
 - Conditions
 - Branches
