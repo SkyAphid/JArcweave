@@ -22,6 +22,3 @@ Below is functionality from Arcweave that is omitted by this parser. This is due
 - Variables
 - Conditions
 - Branches
-
-## Disclaimer
-JArcweave is a new API that is still in active development. There may be bugs or missing features for now.
