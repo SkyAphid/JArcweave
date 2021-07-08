@@ -12,7 +12,7 @@
 - All classes in the project are fully documented
 - Text document included which summarizes the Arcweave JSON format, along with tips on expanding JArcweave's functionality
 
-## Example File
+## Example Test Program
 - [Hello World](https://github.com/SkyAphid/JArcweaveImporter/blob/master/src/test/com/nokoriware/arcweave/test/JArcweaveHelloWorldExample.java): a basic Hello World program that lets you test out exported JSON files
 
 ## Unsupported Functionality
