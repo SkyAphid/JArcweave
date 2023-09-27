@@ -2,7 +2,7 @@
     "startingElement": "f385c762-315b-44ca-9560-edc4763eb8c5",
     "boards": {
         "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c": {
-            "name": "Arcweave Board 2",
+            "name": "JumperTest",
             "notes": [],
             "jumpers": [],
             "branches": [],
@@ -17,11 +17,12 @@
             "branches": [],
             "children": [
                 "6b0eccbc-0b3c-4885-adf2-08014aec2f3e",
-                "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c"
+                "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c",
+                "6a01117f-4d13-4ad9-ab36-37006c4bd591"
             ]
         },
         "6b0eccbc-0b3c-4885-adf2-08014aec2f3e": {
-            "name": "Arcweave Board 1",
+            "name": "BasicTest",
             "notes": [
                 "49912502-1eb4-412f-809e-a4d6c70c8a36"
             ],
@@ -31,7 +32,8 @@
             "branches": [],
             "elements": [
                 "f385c762-315b-44ca-9560-edc4763eb8c5",
-                "671670a2-6621-4ed1-9097-35849eca6f02"
+                "671670a2-6621-4ed1-9097-35849eca6f02",
+                "feb9748e-981d-4f15-97f0-372371bfdc15"
             ],
             "connections": [
                 "1514a4e1-9c5b-4b82-af70-60fc88807ed4",
@@ -52,8 +54,24 @@
             "title": "<p>Player responds yes | Jumper Test<\/p>",
             "content": "<p>Damn straight.<\/p>",
             "outputs": [],
-            "components": [],
-            "linkedBoard": null
+            "components": [
+                "7362bb13-ae4d-4956-8433-dd9a36a3b827"
+            ]
+        },
+        "f385c762-315b-44ca-9560-edc4763eb8c5": {
+            "theme": "default",
+            "title": "<p><span class=\"mention-component mention\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-label=\"Princess\" data-type=\"component\">Princess<\/span> | <span class=\"mention-component mention\" data-id=\"e906ba34-1800-453e-8a3e-fd083e6f8fd4\" data-label=\"Second Link Test\" data-type=\"component\">Second Link Test<\/span> | <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https:\/\/YouTube.com\">Third Link Test<\/a>| Starting Point<\/p>",
+            "content": "<p>'Dost thou love me?<\/p>",
+            "outputs": [
+                "780bb852-9de7-4901-98b5-19f89c770ef8",
+                "1514a4e1-9c5b-4b82-af70-60fc88807ed4"
+            ],
+            "attributes": [
+                "21bc4ab8-2a47-4aa4-8f6b-0308f00f0d39"
+            ],
+            "components": [
+                "7362bb13-ae4d-4956-8433-dd9a36a3b827"
+            ]
         },
         "671670a2-6621-4ed1-9097-35849eca6f02": {
             "theme": "default",
@@ -62,26 +80,18 @@
             "outputs": [
                 "30791d27-3a7a-4eca-a47a-4a0b808089d6"
             ],
-            "components": [],
-            "linkedBoard": "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c"
-        },
-        "f385c762-315b-44ca-9560-edc4763eb8c5": {
-            "theme": "default",
-            "title": "<p><span class=\"mention mention-component\" data-id=\"7362bb13-ae4d-4956-8433-dd9a36a3b827\" data-type=\"component\">Princess<\/span> | <span class=\"mention mention-component\" data-id=\"e906ba34-1800-453e-8a3e-fd083e6f8fd4\" data-type=\"component\">Second Link Test<\/span> | <span class=\"mention mention-component\" data-id=\"423d1ac2-b12d-4a27-8331-7bd272e0c065\" data-type=\"component\">Third Link Test<\/span> | Starting Point<\/p>",
-            "content": "<p>'Dost thou love me?<\/p>",
-            "outputs": [
-                "780bb852-9de7-4901-98b5-19f89c770ef8",
-                "1514a4e1-9c5b-4b82-af70-60fc88807ed4"
-            ],
             "components": [
                 "7362bb13-ae4d-4956-8433-dd9a36a3b827"
             ],
-            "linkedBoard": null
-        }
-    },
-    "jumpers": {
-        "031ad9e7-ff95-4fec-8e16-c5462f1c09bf": {
-            "elementId": "17d883b5-ea07-4b75-aa6f-f3e10506de00"
+            "linkedBoard": "1f55c377-ea16-4e30-8b54-60b4e1b5cf4c"
+        },
+        "feb9748e-981d-4f15-97f0-372371bfdc15": {
+            "theme": "default",
+            "title": "",
+            "content": "",
+            "outputs": [],
+            "autoHeight": true,
+            "components": []
         }
     },
     "connections": {
@@ -113,11 +123,56 @@
             "targetType": "jumpers"
         }
     },
+    "jumpers": {
+        "031ad9e7-ff95-4fec-8e16-c5462f1c09bf": {
+            "elementId": "17d883b5-ea07-4b75-aa6f-f3e10506de00"
+        }
+    },
+    "assets": {
+        "647d0495-341f-42b2-8788-b47dace22bf8": {
+            "root": true,
+            "children": []
+        }
+    },
     "branches": {},
+    "conditions": {},
+    "variables": {
+        "3a21ee01-9e92-4921-8d3b-db70d45a5bbe": {
+            "name": "string_test",
+            "type": "string",
+            "value": "\"value\""
+        },
+        "45cf2dcd-d669-486b-9187-d526fc32007a": {
+            "name": "coins",
+            "type": "integer",
+            "value": 0
+        },
+        "5f079cc4-2015-41a7-a051-4975cc20ca53": {
+            "name": "has_key",
+            "type": "boolean",
+            "value": false
+        },
+        "68fcbf0e-d86a-4f4a-ac24-52f336b61c4e": {
+            "name": "float_test",
+            "type": "float",
+            "value": 0.5
+        },
+        "b113a19b-c25f-4216-b51c-86c554528290": {
+            "root": true,
+            "children": [
+                "5f079cc4-2015-41a7-a051-4975cc20ca53",
+                "45cf2dcd-d669-486b-9187-d526fc32007a",
+                "3a21ee01-9e92-4921-8d3b-db70d45a5bbe",
+                "68fcbf0e-d86a-4f4a-ac24-52f336b61c4e"
+            ]
+        }
+    },
     "components": {
         "08047210-6287-4c8e-86f6-de4f55d749b2": {
             "name": "ComponentListTestObject",
-            "attributes": []
+            "attributes": [
+                "f3c62358-903d-4569-bb8c-576c703a0df6"
+            ]
         },
         "423d1ac2-b12d-4a27-8331-7bd272e0c065": {
             "name": "Third Link Test",
@@ -138,8 +193,7 @@
             "attributes": [
                 "d1618fe6-986d-4fef-b45f-7e0853e21376",
                 "de7f78bf-3ef4-43d3-8822-02c801512d54",
-                "a7cdc128-febc-4eea-a8c3-62817eded92b",
-                "12fb5c6b-73c2-4306-8443-4785894d0549"
+                "a7cdc128-febc-4eea-a8c3-62817eded92b"
             ]
         },
         "e906ba34-1800-453e-8a3e-fd083e6f8fd4": {
@@ -156,29 +210,38 @@
         }
     },
     "attributes": {
-        "12fb5c6b-73c2-4306-8443-4785894d0549": {
-            "name": "Name",
+        "21bc4ab8-2a47-4aa4-8f6b-0308f00f0d39": {
+            "cId": "f385c762-315b-44ca-9560-edc4763eb8c5",
+            "name": "Test Attribute",
+            "cType": "elements",
             "value": {
-                "data": "Princess",
-                "type": "string"
+                "data": "Attribute Data",
+                "type": "string",
+                "plain": true
             }
         },
         "36d8e643-4998-4e5a-81ce-7cb4770f06a4": {
-            "name": null,
+            "cId": "e906ba34-1800-453e-8a3e-fd083e6f8fd4",
+            "name": "Princess",
+            "cType": "components",
             "value": {
-                "data": null,
+                "data": "<p>runProgram()<\/p>",
                 "type": "string"
             }
         },
         "a7cdc128-febc-4eea-a8c3-62817eded92b": {
+            "cId": "7362bb13-ae4d-4956-8433-dd9a36a3b827",
             "name": "Identifier",
+            "cType": "components",
             "value": {
                 "data": "<p>Character<\/p>",
                 "type": "string"
             }
         },
         "d1618fe6-986d-4fef-b45f-7e0853e21376": {
-            "name": null,
+            "cId": "7362bb13-ae4d-4956-8433-dd9a36a3b827",
+            "name": "Princess",
+            "cType": "components",
             "value": {
                 "data": [
                     "08047210-6287-4c8e-86f6-de4f55d749b2"
@@ -187,29 +250,27 @@
             }
         },
         "de7f78bf-3ef4-43d3-8822-02c801512d54": {
+            "cId": "7362bb13-ae4d-4956-8433-dd9a36a3b827",
             "name": "Filename",
+            "cType": "components",
             "value": {
-                "data": "<p>princess<\/p>",
+                "data": "<p>princess.png<\/p>",
                 "type": "string"
+            }
+        },
+        "f3c62358-903d-4569-bb8c-576c703a0df6": {
+            "cId": "08047210-6287-4c8e-86f6-de4f55d749b2",
+            "name": "",
+            "cType": "components",
+            "value": {
+                "data": [],
+                "type": "component-list"
             }
         }
     },
-    "assets": {
-        "647d0495-341f-42b2-8788-b47dace22bf8": {
-            "root": true,
-            "children": []
-        }
-    },
-    "variables": {
-        "b113a19b-c25f-4216-b51c-86c554528290": {
-            "root": true,
-            "children": []
-        }
-    },
-    "conditions": {},
     "name": "Hello World",
     "cover": {
-        "file": "1605035391_5faae57f887de.png",
+        "file": "1625593808_60e497d0e5751.png",
         "type": "cover-image"
     }
 }

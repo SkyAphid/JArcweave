@@ -5,12 +5,14 @@
 
 	<groupId>com.nokoriware.arcweave</groupId>
 	<artifactId>jarcweave-importer</artifactId>
-	<version>1</version>
+	<version>2</version>
 	<name>JArcweave</name>
-
+	
 	<!-- Configurable version numbers for various dependencies -->
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javaxjson.version>1.1.4</javaxjson.version>
+		<jsoup.version>1.16.1</jsoup.version>
 	</properties>
 
 	<build>
@@ -40,6 +42,13 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
 			<version>${javaxjson.version}</version>
+		</dependency>
+
+	<!-- JSoup - https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
 		</dependency>
 
 	</dependencies>
