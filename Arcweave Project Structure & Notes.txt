@@ -21,6 +21,9 @@ Project
 	-Source ID -> TargetID
 -Components (ID and Data)
 	-Attributes (tied by ID)
+-Component Folders (ID and Data)
+	-Contains children; never contain attributes.
+	-Can be a Root (every project has a root, acting as a container for everything in the project)
 -Attributes (ID and Data)
 	-cID = ID of parent component/element
 	-cType = type of parent (component or element)

@@ -425,9 +425,14 @@ public class ArcweaveJsonImporter {
 			//Component Name
 			String name = componentObject.getString("name");
 			component.setName(name);
-			//System.out.println(name);
 			
-			//Check if this component is a root component
+			/*
+			 * 
+			 * Component Folder
+			 * 
+			 */
+			
+			//Check if this is a root component
 			if (containsValidKey(componentObject, "root")) {
 				
 				boolean isRoot = componentObject.getBoolean("root");
@@ -439,6 +444,11 @@ public class ArcweaveJsonImporter {
 			
 			//Add children component IDs for nested folders, if applicable
 			if (containsValidKey(componentObject, "children")) {
+				component.setFolder(true);
+				
+				/*
+				 * Add children component IDs to the folder.
+				 */
 				JsonArray childrenIDs = componentObject.getJsonArray("children");
 
 				for (int i = 0; i < childrenIDs.size(); i++) {
@@ -447,7 +457,16 @@ public class ArcweaveJsonImporter {
 					component.getChildrenIDs().add(childID);
 					//System.out.println(childID);
 				}
+				
+			} else {
+				component.setFolder(false);
 			}
+			
+			/*
+			 * 
+			 * Normal Component
+			 * 
+			 */
 			
 			//Add attribute IDs
 			if (containsValidKey(componentObject, "attributes")) {

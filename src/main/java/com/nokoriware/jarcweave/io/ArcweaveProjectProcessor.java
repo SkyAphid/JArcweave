@@ -132,6 +132,7 @@ public class ArcweaveProjectProcessor {
 			Component component = new Component(rawComponent.getID());
 			component.setName(rawComponent.getName());
 			component.setRoot(rawComponent.isRoot());
+			component.setFolder(rawComponent.isFolder());
 			
 			//add to project
 			project.getComponents().add(component);
