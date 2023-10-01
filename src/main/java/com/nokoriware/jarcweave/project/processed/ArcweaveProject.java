@@ -1,8 +1,15 @@
 package com.nokoriware.jarcweave.project.processed;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import com.nokoriware.jarcweave.io.ArcweaveJsonImporter;
+import com.nokoriware.jarcweave.io.ArcweaveProjectProcessor;
 import com.nokoriware.jarcweave.project.Carrier;
+import com.nokoriware.jarcweave.project.NamedCarrier;
+import com.nokoriware.jarcweave.project.TitledCarrier;
+import com.nokoriware.jarcweave.project.raw.RawArcweaveProject;
 
 /**
  * This is a fully processed Arcweave Project. Instead of everything being tied to IDs, all data has been tied to actual Java objects instead with proper references.
@@ -65,6 +72,10 @@ public class ArcweaveProject {
 		return (Board) Carrier.getCarrier(boards, ID);
 	}
 	
+	public Board getBoardByName(String name) {
+		return (Board) NamedCarrier.getCarrier(boards, name);
+	}
+	
 	/*
 	 * Notes
 	 */
@@ -88,6 +99,10 @@ public class ArcweaveProject {
 	
 	public Element getElement(String ID) {
 		return (Element) Carrier.getCarrier(elements, ID);
+	}
+	
+	public Element getElementByTitle(String title) {
+		return (Element) TitledCarrier.getCarrierByTitle(elements, title);
 	}
 	
 	/*
@@ -126,6 +141,10 @@ public class ArcweaveProject {
 		return (Component) Carrier.getCarrier(components, ID);
 	}
 	
+	public Component getComponentByName(String name) {
+		return (Component) NamedCarrier.getCarrierByName(components, name);
+	}
+	
 	/*
 	 * Attributes
 	 */
@@ -136,6 +155,19 @@ public class ArcweaveProject {
 	
 	public Attribute getAttribute(String ID) {
 		return (Attribute) Carrier.getCarrier(attributes, ID);
+	}
+	
+	public Attribute getAttributeByName(String name) {
+		return (Attribute) NamedCarrier.getCarrierByName(attributes, name);
+	}
+	
+	/*
+	 * Quick-IO
+	 */
+	
+	public static ArcweaveProject importJSON(File file) throws IOException {
+		RawArcweaveProject rawProject = ArcweaveJsonImporter.read(file);
+		return ArcweaveProjectProcessor.process(rawProject);
 	}
 
 }

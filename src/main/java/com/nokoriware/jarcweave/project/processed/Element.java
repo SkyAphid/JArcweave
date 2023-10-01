@@ -2,11 +2,10 @@ package com.nokoriware.jarcweave.project.processed;
 
 import java.util.ArrayList;
 
-import com.nokoriware.jarcweave.project.Carrier;
+import com.nokoriware.jarcweave.project.TitledCarrier;
 
-public class Element extends Carrier {
+public class Element extends TitledCarrier {
 	
-	private Content title;
 	private Content content;
 	
 	private ArrayList<Connection> connectionOutputs = new ArrayList<>();
@@ -17,14 +16,6 @@ public class Element extends Carrier {
 
 	public Element(String id) {
 		super(id);
-	}
-	
-	public Content getTitle() {
-		return title;
-	}
-
-	public void setTitle(Content title) {
-		this.title = title;
 	}
 
 	public Content getContent() {
@@ -43,10 +34,26 @@ public class Element extends Carrier {
 		return attributes;
 	}
 	
+	/**
+	 * @param name - the name of the attribute to retrieve
+	 * @return the first occurring attribute with the given name
+	 */
+	public Attribute getAttributeByName(String name) {
+		return (Attribute) Attribute.getCarrierByName(attributes, name);
+	}
+	
 	public ArrayList<Component> getComponents() {
 		return components;
 	}
-
+	
+	/**
+	 * @param name - the name of the child component to retrieve
+	 * @return the first occurring child component with the given name
+	 */
+	public Component getComponentByName(String name) {
+		return (Component) Component.getCarrierByName(components, name);
+	}
+	
 	public Board getLinkedBoard() {
 		return linkedBoard;
 	}
@@ -70,5 +77,6 @@ public class Element extends Carrier {
 		}
 		
 		return false;
+		
 	}
 }

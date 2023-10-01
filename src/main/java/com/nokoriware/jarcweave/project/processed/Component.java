@@ -2,11 +2,10 @@ package com.nokoriware.jarcweave.project.processed;
 
 import java.util.ArrayList;
 
-import com.nokoriware.jarcweave.project.Carrier;
+import com.nokoriware.jarcweave.project.NamedCarrier;
 
-public class Component extends Carrier {
+public class Component extends NamedCarrier {
 	
-	private String name;
 	private ArrayList<Attribute> attributes = new ArrayList<>();
 	
 	private boolean isFolder;
@@ -16,17 +15,17 @@ public class Component extends Carrier {
 	public Component(String id) {
 		super(id);
 	}
-	
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public ArrayList<Attribute> getAttributes() {
 		return attributes;
+	}
+	
+	/**
+	 * @param name - the name of the attribute to retrieve
+	 * @return the first occurring attribute with the given name
+	 */
+	public Attribute getAttributeByName(String name) {
+		return (Attribute) getCarrierByName(attributes, name);
 	}
 	
 	/*
@@ -53,6 +52,13 @@ public class Component extends Carrier {
 		return children;
 	}
 
+	/**
+	 * @param name - the name of the child component to retrieve
+	 * @return the first occurring child component with the given name
+	 */
+	public Component getChildByName(String name) {
+		return (Component) getCarrierByName(children, name);
+	}
 	
 
 }

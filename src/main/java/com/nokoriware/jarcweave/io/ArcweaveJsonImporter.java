@@ -2,6 +2,8 @@ package com.nokoriware.jarcweave.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.json.Json;
@@ -39,7 +41,7 @@ public class ArcweaveJsonImporter {
 	 * 
 	 * @throws Exception - any exceptions encountered during parsing will be reported.
 	 */
-	public static RawArcweaveProject read(File f) throws Exception {
+	public static RawArcweaveProject read(File f) throws FileNotFoundException {
 		FileInputStream inputStream = new FileInputStream(f);
 		return read(inputStream);
 	}
@@ -49,7 +51,7 @@ public class ArcweaveJsonImporter {
 	 * 
 	 * @throws Exception - any exceptions encountered during parsing will be reported.
 	 */
-	public static RawArcweaveProject read(InputStream inputStream) throws Exception {
+	public static RawArcweaveProject read(InputStream inputStream) {
 
 		/*
 		 * Load JSON file and prepare it for reading
@@ -395,12 +397,12 @@ public class ArcweaveJsonImporter {
 
 			// source type
 			String sourceTypeID = connectionObject.getString("sourceType");
-			Connection.Type sourceType = Connection.Type.get(sourceTypeID);
+			Connection.ConnectionType sourceType = Connection.ConnectionType.get(sourceTypeID);
 			connection.setSourceType(sourceType);
 
 			// target type
 			String targetTypeID = connectionObject.getString("targetType");
-			Connection.Type targetType = Connection.Type.get(targetTypeID);
+			Connection.ConnectionType targetType = Connection.ConnectionType.get(targetTypeID);
 			connection.setTargetType(targetType);
 
 			//Add connections to project
@@ -523,19 +525,19 @@ public class ArcweaveJsonImporter {
 			//Value Type
 			String valueTypeName = valueObject.getString("type");
 			
-			AttributeValue.Type valueType = AttributeValue.Type.get(valueTypeName);
+			AttributeValue.ValueType valueType = AttributeValue.ValueType.get(valueTypeName);
 			value.setValueType(valueType);
 			
 			//Value data
 			if (containsValidKey(valueObject, "data")) {
 
 				//String content
-				if (valueType == AttributeValue.Type.STRING) {
+				if (valueType == AttributeValue.ValueType.STRING) {
 					value.setData(valueObject.getString("data"));
 				}
 
 				//Component list IDs
-				if (valueType == AttributeValue.Type.COMPONENT_LIST) {
+				if (valueType == AttributeValue.ValueType.COMPONENT_LIST) {
 					JsonArray valueData = valueObject.getJsonArray("data");
 					String[] values = new String[valueData.size()];
 

@@ -1,7 +1,7 @@
 package com.nokoriware.jarcweave.project.raw;
 
 import com.nokoriware.jarcweave.project.Carrier;
-import com.nokoriware.jarcweave.project.processed.Connection.Type;
+import com.nokoriware.jarcweave.project.processed.Connection.ConnectionType;
 
 public class RawConnection extends Carrier {
 	
@@ -9,8 +9,8 @@ public class RawConnection extends Carrier {
 	private String sourceID;
 	private String targetID;
 
-	private Type sourceType;
-	private Type targetType;
+	private ConnectionType sourceType;
+	private ConnectionType targetType;
 
 	public RawConnection(String id) {
 		super(id);
@@ -40,19 +40,19 @@ public class RawConnection extends Carrier {
 		this.targetID = targetID;
 	}
 
-	public Type getSourceType() {
+	public ConnectionType getSourceType() {
 		return sourceType;
 	}
 
-	public void setSourceType(Type sourceType) {
+	public void setSourceType(ConnectionType sourceType) {
 		this.sourceType = sourceType;
 	}
 
-	public Type getTargetType() {
+	public ConnectionType getTargetType() {
 		return targetType;
 	}
 
-	public void setTargetType(Type targetType) {
+	public void setTargetType(ConnectionType targetType) {
 		this.targetType = targetType;
 	}
 

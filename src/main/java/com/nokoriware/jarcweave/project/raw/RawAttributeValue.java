@@ -1,12 +1,12 @@
 package com.nokoriware.jarcweave.project.raw;
 
-import com.nokoriware.jarcweave.project.processed.AttributeValue.Type;
+import com.nokoriware.jarcweave.project.processed.AttributeValue.ValueType;
 
 public class RawAttributeValue {
 	
 	private String[] data;
 
-	private Type valueType;
+	private ValueType valueType;
 
 	public String[] getData() {
 		return data;
@@ -16,11 +16,11 @@ public class RawAttributeValue {
 		this.data = data;
 	}
 
-	public Type getValueType() {
+	public ValueType getValueType() {
 		return valueType;
 	}
 
-	public void setValueType(Type valueType) {
+	public void setValueType(ValueType valueType) {
 		this.valueType = valueType;
 	}
 	

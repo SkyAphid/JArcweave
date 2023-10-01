@@ -4,15 +4,15 @@ import com.nokoriware.jarcweave.project.Carrier;
 
 public class Connection extends Carrier {
 	
-	public enum Type {
+	public enum ConnectionType {
 		ELEMENTS("elements"),
 		JUMPERS("jumpers");
 		
 		private String typeName;
 		
-		public static final Type[] values = values();
+		public static final ConnectionType[] values = values();
 		
-		private Type(String typeName) {
+		private ConnectionType(String typeName) {
 			this.typeName = typeName;
 		}
 		
@@ -26,7 +26,7 @@ public class Connection extends Carrier {
 		/**
 		 * Returns the Connection Type enum based on its string name counterpart present in the Arcweave JSON files.
 		 */
-		public static Type get(String typeStringName) {
+		public static ConnectionType get(String typeStringName) {
 			for (int i = 0; i < values.length; i++) {
 				if (values[i].getTypeName().equals(typeStringName)) {
 					return values[i];
@@ -42,8 +42,8 @@ public class Connection extends Carrier {
 	private Element sourceElement;
 	private Element targetElement;
 
-	private Connection.Type sourceType;
-	private Connection.Type targetType;
+	private Connection.ConnectionType sourceType;
+	private Connection.ConnectionType targetType;
 
 	public Connection(String id) {
 		super(id);
@@ -74,19 +74,19 @@ public class Connection extends Carrier {
 		this.targetElement = target;
 	}
 	
-	public Connection.Type getSourceType() {
+	public Connection.ConnectionType getSourceType() {
 		return sourceType;
 	}
 
-	public void setSourceType(Connection.Type sourceType) {
+	public void setSourceType(Connection.ConnectionType sourceType) {
 		this.sourceType = sourceType;
 	}
 
-	public Connection.Type getTargetType() {
+	public Connection.ConnectionType getTargetType() {
 		return targetType;
 	}
 
-	public void setTargetType(Connection.Type targetType) {
+	public void setTargetType(Connection.ConnectionType targetType) {
 		this.targetType = targetType;
 	}
 

@@ -2,12 +2,10 @@ package com.nokoriware.jarcweave.project.processed;
 
 import java.util.ArrayList;
 
-import com.nokoriware.jarcweave.project.Carrier;
+import com.nokoriware.jarcweave.project.NamedCarrier;
 
-public class Board extends Carrier {
-	
-	private String name;
-	
+public class Board extends NamedCarrier {
+
 	private ArrayList<Note> notes = new ArrayList<>();
 	private ArrayList<Jumper> jumpers = new ArrayList<>();
 	//TODO private ArrayList<Branch> branches = new ArrayList<>();
@@ -16,14 +14,6 @@ public class Board extends Carrier {
 
 	public Board(String id) {
 		super(id);
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public ArrayList<Note> getNotes() {

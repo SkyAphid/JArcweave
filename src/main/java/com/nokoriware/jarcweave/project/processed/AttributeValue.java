@@ -2,15 +2,15 @@ package com.nokoriware.jarcweave.project.processed;
 
 public class AttributeValue {
 	
-	public enum Type {
+	public enum ValueType {
 		STRING("string"),
 		COMPONENT_LIST("component-list");
 		
 		private String typeName;
 		
-		public static final Type[] values = values();
+		public static final ValueType[] values = values();
 		
-		private Type(String typeName) {
+		private ValueType(String typeName) {
 			this.typeName = typeName;
 		}
 		
@@ -24,7 +24,7 @@ public class AttributeValue {
 		/**
 		 * Returns the Attribute Value Type enum based on its string name counterpart present in the Arcweave JSON files.
 		 */
-		public static Type get(String typeStringName) {
+		public static ValueType get(String typeStringName) {
 			for (int i = 0; i < values.length; i++) {
 				if (values[i].getTypeName().equals(typeStringName)) {
 					return values[i];
@@ -38,7 +38,7 @@ public class AttributeValue {
 	private Content content;
 	private Component[] componentList;
 	
-	private AttributeValue.Type valueType;
+	private AttributeValue.ValueType valueType;
 
 	public Content getContent() {
 		return content;
@@ -56,11 +56,11 @@ public class AttributeValue {
 		this.componentList = componentList;
 	}
 
-	public AttributeValue.Type getValueType() {
+	public AttributeValue.ValueType getValueType() {
 		return valueType;
 	}
 
-	public void setValueType(AttributeValue.Type valueType) {
+	public void setValueType(AttributeValue.ValueType valueType) {
 		this.valueType = valueType;
 	}
 	

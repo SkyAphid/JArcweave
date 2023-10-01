@@ -161,11 +161,11 @@ public class ArcweaveProjectProcessor {
 			//System.out.println("2   " + rawAttribute.getID() + " " + Arrays.toString(rawValue.getData()));
 			
 			//Value Type
-			AttributeValue.Type type = rawValue.getValueType();
+			AttributeValue.ValueType type = rawValue.getValueType();
 			value.setValueType(type);
 			
 			//If the AttributeValue only contains string content, copy that data over. If references, save that for the second pass.
-			if (type == AttributeValue.Type.STRING) {
+			if (type == AttributeValue.ValueType.STRING) {
 				value.setContent(new Content(rawValue.getData()[0]));
 			}
 			
@@ -329,13 +329,13 @@ public class ArcweaveProjectProcessor {
 			//System.err.println(connection.getSourceType() + " " + connection.getTargetType());
 			
 			//Link source elements
-			if (connection.getSourceType() == Connection.Type.ELEMENTS) {
+			if (connection.getSourceType() == Connection.ConnectionType.ELEMENTS) {
 				String sourceElementID = rawConnection.getSourceID();
 				connection.setSourceElement(project.getElement(sourceElementID));
 			}
 
 			//Link jumper elements to source
-			if (connection.getSourceType() == Connection.Type.JUMPERS) {
+			if (connection.getSourceType() == Connection.ConnectionType.JUMPERS) {
 				String sourceJumperID = rawConnection.getSourceID();
 				Jumper sourceJumper = project.getJumper(sourceJumperID);
 				
@@ -343,13 +343,13 @@ public class ArcweaveProjectProcessor {
 			}
 			
 			//Link target elements
-			if (connection.getTargetType() == Connection.Type.ELEMENTS) {
+			if (connection.getTargetType() == Connection.ConnectionType.ELEMENTS) {
 				String targetID = rawConnection.getTargetID();
 				connection.setTargetElement(project.getElement(targetID));
 			}
 			
 			//Link jumper elements to targets
-			if (connection.getTargetType() == Connection.Type.JUMPERS) {
+			if (connection.getTargetType() == Connection.ConnectionType.JUMPERS) {
 				String targetJumperID = rawConnection.getTargetID();
 				Jumper targetJumper = project.getJumper(targetJumperID);
 				
@@ -415,12 +415,12 @@ public class ArcweaveProjectProcessor {
 			}
 			
 			//If the attribute type is a string, then make sure to link its content, in case it has any ComponentMentions.
-			if (rawAttributeValue.getValueType() == AttributeValue.Type.STRING) {
+			if (rawAttributeValue.getValueType() == AttributeValue.ValueType.STRING) {
 				attribute.getValue().getContent().linkComponentMentions(project);
 			}
 			
 			//If the AttributeValue type is a component list, then link all of those references. For string content, that is copied over during the first pass.
-			if (rawAttributeValue.getValueType() == AttributeValue.Type.COMPONENT_LIST) {
+			if (rawAttributeValue.getValueType() == AttributeValue.ValueType.COMPONENT_LIST) {
 				String[] data = rawAttributeValue.getData();
 				
 				for (int j = 0; j < data.length; j++) {

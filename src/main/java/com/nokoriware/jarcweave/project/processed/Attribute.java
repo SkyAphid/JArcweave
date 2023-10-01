@@ -1,8 +1,9 @@
 package com.nokoriware.jarcweave.project.processed;
 
 import com.nokoriware.jarcweave.project.Carrier;
+import com.nokoriware.jarcweave.project.NamedCarrier;
 
-public class Attribute extends Carrier {
+public class Attribute extends NamedCarrier {
 
 	public enum CType {
 		COMPONENTS("components"),
@@ -28,7 +29,6 @@ public class Attribute extends Carrier {
 	
 	private String cID;
 	private CType cType;
-	private String name;
 	private AttributeValue value;
 	
 	//Will be either a Component or Element
@@ -58,14 +58,6 @@ public class Attribute extends Carrier {
 	
 	public void setCType(CType cType) {
 		this.cType = cType;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public AttributeValue getValue() {
