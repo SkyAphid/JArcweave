@@ -15,7 +15,7 @@ Project
 	-Components (tied by ID)
 	-Attributes (tied by ID)
 	-Connection Outputs
--Jumpers (ID)
+-Jumpers (ID) -> When activated, they will activate dialogue on another board
 -Connections (ID and Data)
 	-Label
 	-Source ID -> TargetID
@@ -36,6 +36,8 @@ Project
 -Variables 
 -Conditions
 -Branches
+
+Note* IDs appear to just be randomly generated UUIDs
 
 ----
 
