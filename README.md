@@ -22,3 +22,9 @@ Below is functionality from Arcweave that is omitted by this parser. This is due
 - Variables
 - Conditions
 - Branches
+
+## Looking for a free open-source alternative to Arcweave? 
+[Check out my free, open source dialogue editor, Corkboard!](https://github.com/SkyAphid/corkboard)
+
+[![logo](https://github.com/user-attachments/assets/aa6e3831-445f-4d68-b4af-e9ba39f0a1eb)](https://github.com/SkyAphid/corkboard)
+
